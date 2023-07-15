@@ -50,6 +50,12 @@ clang runtime/scheme.c hello.lib.c wow.lib.c wow.entry.c
 ./a.out
 ```
 
+### Something you need to know about the implementation
+
+In this implementation, I only put integer as expression into the compiler, so there has no runtime value supporting needed. Except that, I also didn't really implement module import feature, but the explaination already points out how does it actually work.
+
+Of course, these make our program less practical, but also help us more focus on only linking problem for purpose. This repository is more like a good start point, you setup your project from here, and add more features.
+
 ## Must define first?
 
 If one think a definition can be access from any part of file, they can compile code to
