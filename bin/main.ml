@@ -23,6 +23,7 @@ let () =
     let in_chan = open_in file_name in
     (* parsing *)
     let prog = parse_program in_chan in
-    let out_chan = open_out "_build/output.zig" in
-    Lisboot.Compile.compile prog out_chan
+    let out_lib_ch = open_out "_build/output.lib.c" in
+    let out_exe_ch = open_out "_build/output.exe.c" in
+    Lisboot.Compile.compile prog out_lib_ch out_exe_ch
   else print_endline ("no file named " ^ file_name)

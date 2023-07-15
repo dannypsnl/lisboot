@@ -25,8 +25,6 @@ let newline = '\r' | '\n' | "\r\n"
 rule token = parse
   | '(' { L_PAREN }
   | ')' { R_PAREN }
-  | "#t" { BOOL true }
-  | "#f" { BOOL false }
   | "define" { DEFINE }
   | "lambda" { LAMBDA }
   | identifier { IDENTIFIER (Lexing.lexeme lexbuf) }

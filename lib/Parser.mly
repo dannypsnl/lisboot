@@ -5,7 +5,6 @@ open Ast
 %token EOF
 %token <string> IDENTIFIER
 %token <int> INT
-%token <bool> BOOL
 // keyword or symbol
 %token DEFINE
 %token LAMBDA
@@ -31,5 +30,4 @@ expr:
   | L_PAREN fn=expr args=expr* R_PAREN { App (fn, args) }
   | v=IDENTIFIER { Var v }
   | i=INT { Int i }
-  | b=BOOL { Bool b }
   ;

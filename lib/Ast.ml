@@ -3,7 +3,6 @@ and var = string
 
 and expr =
   | Int of int
-  | Bool of bool
   | Var of var
   (* (fn args ...) *)
   | App of expr * expr list
