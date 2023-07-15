@@ -26,7 +26,6 @@ rule token = parse
   | '(' { L_PAREN }
   | ')' { R_PAREN }
   | "define" { DEFINE }
-  | "lambda" { LAMBDA }
   | identifier { IDENTIFIER (Lexing.lexeme lexbuf) }
   | int_constant { INT (int_of_string (Lexing.lexeme lexbuf)) }
   (* etc. *)

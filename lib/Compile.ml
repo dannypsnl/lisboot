@@ -49,6 +49,6 @@ and compile_expr : expr -> string =
         (fun l r -> l ^ "-" ^ compile_expr r)
         (compile_expr (hd args))
         (tl args)
+  (* we don't take care general application here since the trick demonstration is complete *)
   | App (_fn, _args) -> raise TODO
-  | Lam (_, _) -> raise TODO
   | Define _ -> raise Skip
