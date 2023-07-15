@@ -1,5 +1,6 @@
 type program = expr list
 and var = string
+
 and expr =
   | Int of int
   | Bool of bool

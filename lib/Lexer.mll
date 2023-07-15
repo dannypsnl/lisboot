@@ -13,9 +13,10 @@
 let digit = ['0'-'9']
 let sign = ['-' '+']
 let alpha = ['a'-'z' 'A'-'Z']
+let id_alpha = alpha | ['-' '+' '*' '/']
 
 let int_constant = sign? digit+
-let identifier = alpha (alpha | digit | '-')*
+let identifier = id_alpha (id_alpha | digit | '-')*
 
 let whitespace = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
