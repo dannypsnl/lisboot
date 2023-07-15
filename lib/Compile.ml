@@ -3,6 +3,7 @@ open List
 
 exception TODO
 exception Skip
+exception Decl of string
 
 let rec compile : program -> out_channel -> out_channel -> unit =
  fun prog lib_out exe_out ->
@@ -10,23 +11,15 @@ let rec compile : program -> out_channel -> out_channel -> unit =
   iter
     (fun e -> try output_string lib_out (compile_define e) with Skip -> ())
     prog;
-  (* 編譯定義的宣告 *)
-  iter
-    (fun e -> try output_string exe_out (compile_decl e) with Skip -> ())
-    prog;
   (* 把其他表達式編譯到 scheme_entry，每支模組都有這樣的 entry point *)
   output_string exe_out "#include <stdio.h>\n";
   output_string exe_out "void scheme_entry() {\n";
   iter
     (fun e ->
       try output_string exe_out ("printf(\"%d\\n\", " ^ compile_expr e ^ ");")
-      with Skip -> ())
+      with Decl res -> output_string exe_out res)
     prog;
   output_string exe_out "\n}"
-
-and compile_decl : expr -> string =
- fun e ->
-  match e with Define (x, _) -> "extern int " ^ x ^ ";\n" | _ -> raise Skip
 
 and compile_define : expr -> string =
  fun e ->
@@ -51,4 +44,5 @@ and compile_expr : expr -> string =
         (tl args)
   (* we don't take care general application here since the trick demonstration is complete *)
   | App (_fn, _args) -> raise TODO
-  | Define _ -> raise Skip
+  (* 編譯定義的宣告 *)
+  | Define (x, _) -> raise (Decl ("extern int " ^ x ^ ";\n"))
