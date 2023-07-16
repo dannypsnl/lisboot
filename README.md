@@ -7,7 +7,7 @@ With this definition, a program file `hello.ss` with content below
 ```scm
 (define x 1)
 (define y 2)
-x+y
+(+ x y)
 ```
 
 get `3` printed by command `scheme hello.ss`. If another program `wow.ss` import it, `hello.ss` then became a library, but `3` won't get printed. This is a design choice, you can also let that get printed by invoke module's entry point, that will not affect the trick I'm going to explain.
